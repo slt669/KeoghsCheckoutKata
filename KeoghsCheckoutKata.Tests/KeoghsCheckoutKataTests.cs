@@ -1,8 +1,8 @@
 using KeoghsCheckoutKata.Library;
-using System;
+using Moq;
 using System.Collections.Generic;
 using Xunit;
-using Moq;
+
 namespace KeoghsCheckoutKata.Tests
 {
     public class KeoghsCheckoutKataTests
@@ -24,7 +24,6 @@ namespace KeoghsCheckoutKata.Tests
         [InlineData("CDD", "CDD")]
         public void Given_add_an_item_to_basket_Then_should_be_added(string item, string expected)
         {
-
             //Arrange
             //Act
             //Assert
@@ -47,18 +46,17 @@ namespace KeoghsCheckoutKata.Tests
             listOfDiscounts.Add(
             new Discount { SKU = 'D', Quantity = 2, Value = 27.5m });
 
-            // Mock Allows me to test an isolated Repository  
+            // Mock Allows me to test an isolated Repository
 
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
 
-     
-            
             checkout = new Checkout(mockRepository.Object);
             //Assert
             Assert.Equal(expected, checkout.AddtoBasket(item).AddedProducts);
         }
+
         /// <summary>
         /// Given items have been added to the basket Then the total cost of the basket should be calculated
         /// </summary>
@@ -98,7 +96,7 @@ namespace KeoghsCheckoutKata.Tests
             listOfDiscounts.Add(
             new Discount { SKU = 'D', Quantity = 2, Value = 27.5m });
 
-            // Mock Allows me to test an isolated Repository  
+            // Mock Allows me to test an isolated Repository
 
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
@@ -107,6 +105,7 @@ namespace KeoghsCheckoutKata.Tests
             //Assert
             Assert.Equal(expected, checkout.AddtoBasket(items).Total());
         }
+
         /// <summary>
         /// Given I have added a multiple of 3 lots of item ‘B’ to the basket Then a promotion of ‘3 for 40’ should be applied to every multiple of 3 (see: Grid 1).
         /// </summary>
@@ -141,7 +140,7 @@ namespace KeoghsCheckoutKata.Tests
             listOfDiscounts.Add(
             new Discount { SKU = 'D', Quantity = 2, Value = 27.5m });
 
-            // Mock Allows me to test an isolated Repository  
+            // Mock Allows me to test an isolated Repository
 
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
@@ -150,6 +149,7 @@ namespace KeoghsCheckoutKata.Tests
             //Assert
             Assert.Equal(expected, checkout.AddtoBasket(items).Total());
         }
+
         /// <summary>
         /// Given I have added a multiple of 2 lots of item ‘D’ to the basket Then a promotion of ‘25% off’ should be applied to every multiple of 2 (see: Grid 1).
         /// </summary>
@@ -184,13 +184,12 @@ namespace KeoghsCheckoutKata.Tests
             listOfDiscounts.Add(
             new Discount { SKU = 'D', Quantity = 2, Value = 27.5m });
 
-            // Mock Allows me to test an isolated Repository  
+            // Mock Allows me to test an isolated Repository
 
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
 
-          
             checkout = new Checkout(mockRepository.Object);
             //Assert
             Assert.Equal(expected, checkout.AddtoBasket(items).Total());

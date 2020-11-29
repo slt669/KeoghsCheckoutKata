@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KeoghsCheckoutKata.Library
+﻿namespace KeoghsCheckoutKata.Library
 {
     public interface IProduct
     {

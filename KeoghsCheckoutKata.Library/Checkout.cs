@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KeoghsCheckoutKata.Library
 {
     public class Checkout : ICheckout
     {
-        IRepository repository;
+        private IRepository repository;
         private char[] productsInBasket;
         private readonly IEnumerable<IProduct> products;
         private readonly IEnumerable<IDiscount> discounts;
@@ -22,6 +21,7 @@ namespace KeoghsCheckoutKata.Library
             this.discounts = repository.GetDiscounts();
             productsInBasket = new char[] { };
         }
+
         //
         public ICheckout AddtoBasket(String Basket)
         {
@@ -34,6 +34,7 @@ namespace KeoghsCheckoutKata.Library
             }
             return this;
         }
+
         //Calculates the total by summing together all of the items then taking away the discounted value
         public decimal Total()
         {
@@ -43,11 +44,13 @@ namespace KeoghsCheckoutKata.Library
             totalDiscount = discounts.Sum(discount => CalculateDiscount(discount, productsInBasket));
             return total - totalDiscount;
         }
+
         //Gets the price for item out of the repository where SKU matches the param passed in
         private decimal PriceForOne(char sku)
         {
             return products.Single(p => p.SKU == sku).Price;
         }
+
         //Counts how many of an item has a discount associated then returns the sum of all the discounted items
         private decimal CalculateDiscount(IDiscount discount, char[] cart)
         {

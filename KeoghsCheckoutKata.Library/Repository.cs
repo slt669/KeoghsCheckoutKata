@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace KeoghsCheckoutKata.Library
 {
@@ -19,6 +18,7 @@ namespace KeoghsCheckoutKata.Library
                new Product { SKU = 'D', Price = 55 });
             return listOfProducts;
         }
+
         public IEnumerable<Discount> GetDiscounts()
         {
             var listOfDiscounts = new List<Discount>();
