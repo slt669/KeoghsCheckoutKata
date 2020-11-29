@@ -4,9 +4,9 @@ using System.Text;
 
 namespace KeoghsCheckoutKata.Library
 {
-    public class Product:IProduct
+    public interface IProduct
     {
-        public char SKU { get; set; }
-        public decimal Price { get; set; }
+        char SKU { get; set; }
+        decimal Price { get; set; }
     }
 }

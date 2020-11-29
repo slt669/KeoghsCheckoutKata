@@ -5,7 +5,7 @@ namespace KeoghsCheckoutKata.Library
 {
     public class Repository : IRepository
     {
-        public List<Product> GetProducts()
+        public IEnumerable<Product> GetProducts()
         {
             var listOfProducts = new List<Product>();
 
@@ -19,7 +19,7 @@ namespace KeoghsCheckoutKata.Library
                new Product { SKU = 'D', Price = 55 });
             return listOfProducts;
         }
-        public List<Discount> GetDiscounts()
+        public IEnumerable<Discount> GetDiscounts()
         {
             var listOfDiscounts = new List<Discount>();
             listOfDiscounts.Add(

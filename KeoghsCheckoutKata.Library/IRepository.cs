@@ -6,7 +6,7 @@ namespace KeoghsCheckoutKata.Library
 {
     public interface IRepository
     {
-        public List<Product> GetProducts();
-        public List<Discount> GetDiscounts();
+        public IEnumerable<Product> GetProducts();
+        public IEnumerable<Discount> GetDiscounts();
     }
 }

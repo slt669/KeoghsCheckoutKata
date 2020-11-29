@@ -62,7 +62,7 @@ namespace KeoghsCheckoutKata.Tests
         /// <summary>
         /// Given items have been added to the basket Then the total cost of the basket should be calculated
         /// </summary>
-        /// <param name="scan"></param>
+        /// <param name="items"></param>
         /// <param name="expected"></param>
         [Theory]
         [InlineData("A", 10)]
@@ -110,7 +110,7 @@ namespace KeoghsCheckoutKata.Tests
         /// <summary>
         /// Given I have added a multiple of 3 lots of item ‘B’ to the basket Then a promotion of ‘3 for 40’ should be applied to every multiple of 3 (see: Grid 1).
         /// </summary>
-        /// <param name="scan"></param>
+        /// <param name="items"></param>
         /// <param name="expected"></param>
         [Theory]
         [InlineData("B", 15)]
@@ -146,11 +146,14 @@ namespace KeoghsCheckoutKata.Tests
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
+            checkout = new Checkout(mockRepository.Object);
+            //Assert
+            Assert.Equal(expected, checkout.AddtoBasket(items).Total());
         }
         /// <summary>
         /// Given I have added a multiple of 2 lots of item ‘D’ to the basket Then a promotion of ‘25% off’ should be applied to every multiple of 2 (see: Grid 1).
         /// </summary>
-        /// <param name="scan"></param>
+        /// <param name="items"></param>
         /// <param name="expected"></param>
         [Theory]
         [InlineData("D", 55)]
@@ -187,6 +190,10 @@ namespace KeoghsCheckoutKata.Tests
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
 
+          
+            checkout = new Checkout(mockRepository.Object);
+            //Assert
+            Assert.Equal(expected, checkout.AddtoBasket(items).Total());
         }
     }
 }
