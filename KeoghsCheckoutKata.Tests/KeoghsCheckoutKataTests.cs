@@ -7,6 +7,8 @@ namespace KeoghsCheckoutKata.Tests
 {
     public class KeoghsCheckoutKataTests
     {
+        private ICheckout checkout;
+
         /// <summary>
         /// Given I have selected to add an item to the basket Then the item should be added to the basket
         /// </summary>
@@ -51,7 +53,11 @@ namespace KeoghsCheckoutKata.Tests
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
 
+     
+            
+            checkout = new Checkout(mockRepository.Object);
 
+            Assert.Equal(expected, checkout.AddtoBasket(item).AddedProducts);
         }
         /// <summary>
         /// Given items have been added to the basket Then the total cost of the basket should be calculated
