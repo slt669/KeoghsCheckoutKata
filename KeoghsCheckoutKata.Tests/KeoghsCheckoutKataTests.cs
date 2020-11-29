@@ -56,7 +56,7 @@ namespace KeoghsCheckoutKata.Tests
      
             
             checkout = new Checkout(mockRepository.Object);
-
+            //Assert
             Assert.Equal(expected, checkout.AddtoBasket(item).AddedProducts);
         }
         /// <summary>
@@ -103,6 +103,9 @@ namespace KeoghsCheckoutKata.Tests
             Mock<IRepository> mockRepository = new Mock<IRepository>();
             mockRepository.Setup(x => x.GetProducts()).Returns(listOfProducts);
             mockRepository.Setup(x => x.GetDiscounts()).Returns(listOfDiscounts);
+            checkout = new Checkout(mockRepository.Object);
+            //Assert
+            Assert.Equal(expected, checkout.AddtoBasket(items).Total());
         }
         /// <summary>
         /// Given I have added a multiple of 3 lots of item ‘B’ to the basket Then a promotion of ‘3 for 40’ should be applied to every multiple of 3 (see: Grid 1).

@@ -30,6 +30,17 @@ namespace KeoghsCheckoutKata.Library
             }
             return this;
         }
+        public decimal Total()
+        {
+            decimal total = 0;
+            total = productsInBasket.Sum(item => PriceForOne(item));
+           
+            return total ;
+        }
 
+        private decimal PriceForOne(char sku)
+        {
+            return repository.GetProducts().Single(p => p.SKU == sku).Price;
+        }
     }
 }
